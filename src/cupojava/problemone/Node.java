@@ -10,10 +10,49 @@ public class Node implements GridElement {
     public static final int N = 0, S = 1, E = 2, W = 3, NE = 4, NW = 5, SE = 6, SW = 7;
 
     protected Node[] neighbors = new Node[8];
-//    Node N = null, S = null, E = null, W = null, NE = null, NW = null, SE = null, SW = null;
 
+    public Node(int player, Node[] neighbors){
+        this.player = player;
+        this.neighbors = neighbors;
+    }
 
-
+    public Node(Node parent, int parentSide){
+        this.neighbors[parentSide] = parent;
+        switch (parentSide){
+            case N:
+                this.neighbors[NW]=parent.neighbors[W];
+                this.neighbors[NE]=parent.neighbors[E];
+                break;
+            case S:
+                this.neighbors[SW]=parent.neighbors[W];
+                this.neighbors[SE]=parent.neighbors[E];
+                break;
+            case E:
+                this.neighbors[SE]=parent.neighbors[S];
+                this.neighbors[NE]=parent.neighbors[N];
+                break;
+            case W:
+                this.neighbors[SW]=parent.neighbors[S];
+                this.neighbors[NW]=parent.neighbors[N];
+                break;
+            case NE:
+                this.neighbors[N]=parent.neighbors[W];
+                this.neighbors[E]=parent.neighbors[S];
+                break;
+            case NW:
+                this.neighbors[N]=parent.neighbors[E];
+                this.neighbors[W]=parent.neighbors[S];
+                break;
+            case SE:
+                this.neighbors[E]=parent.neighbors[N];
+                this.neighbors[S]=parent.neighbors[W];
+                break;
+            case SW:
+                this.neighbors[W]=parent.neighbors[N];
+                this.neighbors[S]=parent.neighbors[E];
+                break;
+        }
+    }
 
     public List<Node> getConnections() {
         List<Node> matches = new ArrayList<>();
@@ -34,28 +73,34 @@ public class Node implements GridElement {
     }
 
 
-        public Node(int player, Node[] neighbors){
-            this.player = player;
-            this.neighbors = neighbors;
-        }
+
 
         public void validateBorders() {
             for(Node testNode: neighbors){
-
+                if (testNode.neighbors[E] == null) {
+                    createColumn(this, false);
+                }else if (testNode.neighbors[W] == null){
+                    createColumn(this, true);
+                }
+                if(testNode.neighbors[N] == null){
+                    createRow(this, true);
+                } else if(testNode.neighbors[S] == null){
+                    createRow(this, false);
+                }
             }
         }
 
 
         private void createColumn(Node edgeNode, boolean createOnLeft){
-//        do{
-//            Node newNode = new Node(0, )
-//        }
+        do{
+
+        }while(false);
             Node nextNode = edgeNode.neighbors[N];
             while(nextNode != null){
 //                nextNode.neighbors[E] =
             }
         }
-        private void createRow(){
+        private void createRow(Node edgeNode, boolean createOnTop){
 
         }
 
