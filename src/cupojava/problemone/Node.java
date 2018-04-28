@@ -78,35 +78,58 @@ public class Node implements GridElement {
         public void validateBorders() {
             for(Node testNode: neighbors){
                 if (testNode.neighbors[E] == null) {
-                    createColumn(this, false);
+                    createColumn(false);
                 }else if (testNode.neighbors[W] == null){
-                    createColumn(this, true);
+                    createColumn(true);
                 }
                 if(testNode.neighbors[N] == null){
-                    createRow(this, true);
+                    createRow(true);
                 } else if(testNode.neighbors[S] == null){
-                    createRow(this, false);
+                    createRow(false);
                 }
             }
         }
 
 
-        private void createColumn(Node edgeNode, boolean createOnLeft){
-        Node newNode;
-        do{
-            if(createOnLeft) {
-                newNode = new Node(this, W);
-            }else{
-                newNode = new Node(this,E);
-            }
-        }while(false);
-            Node nextNode = edgeNode.neighbors[N];
-            while(nextNode != null){
-//                nextNode.neighbors[E] =
-            }
+        private void createColumn(boolean createOnLeft){
+            Node parent = this;
+            do{
+                if(createOnLeft) {
+                    new Node(parent, E);
+                }else{
+                    new Node(parent, W);
+                }
+                parent = parent.neighbors[N];
+            }while(parent != null);
+            do{
+                parent = this.neighbors[S];
+                if(createOnLeft) {
+                    new Node(parent, E);
+                }else{
+                    new Node(parent, W);
+                }
+                parent = parent.neighbors[S];
+            }while(parent != null);
         }
-        private void createRow(Node edgeNode, boolean createOnTop){
-
+        private void createRow(boolean createOnTop){
+            Node parent = this;
+            do{
+                if(createOnTop) {
+                    new Node(parent, N);
+                }else{
+                    new Node(parent, S);
+                }
+                parent = parent.neighbors[E];
+            }while(parent != null);
+            parent = this.neighbors[W];
+            do{
+                if(createOnTop) {
+                    new Node(parent, N);
+                }else{
+                    new Node(parent, S);
+                }
+                parent = parent.neighbors[W];
+            }while(parent != null);
         }
 
         public int getPlayer() {
