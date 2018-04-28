@@ -16,40 +16,132 @@ public class Node implements GridElement {
         this.neighbors = neighbors;
     }
 
-    public Node(Node parent, int parentSide){
-        this.neighbors[parentSide] = parent;
-        switch (parentSide){
+    public Node(Node parent, int side){
+        switch (side){
             case N:
-                this.neighbors[NW]=parent.neighbors[W];
-                this.neighbors[NE]=parent.neighbors[E];
+                this.neighbors[N] = parent;
+                this.neighbors[NW] = parent.neighbors[W];
+                this.neighbors[NE] = parent.neighbors[E];
+                this.neighbors[W] = parent.neighbors[SW];
+                this.neighbors[E] = parent.neighbors[SE];
+                if(parent.neighbors[SW] != null) {
+                    this.neighbors[SW] = parent.neighbors[SW].neighbors[S];
+                    this.neighbors[S] = parent.neighbors[SW].neighbors[SE];
+                } else {
+                    this.neighbors[SW] = null;
+                    this.neighbors[S] = null;
+                }
+                if(parent.neighbors[SE] != null) {
+                    this.neighbors[SE] = parent.neighbors[SE].neighbors[S];
+                    this.neighbors[S] = parent.neighbors[SE].neighbors[SW];
+                } else {
+                    this.neighbors[SE] = null;
+                    this.neighbors[S] = null;
+                }
                 break;
             case S:
-                this.neighbors[SW]=parent.neighbors[W];
-                this.neighbors[SE]=parent.neighbors[E];
+                this.neighbors[S] = parent;
+                this.neighbors[SW] = parent.neighbors[W];
+                this.neighbors[SE] = parent.neighbors[E];
+                this.neighbors[W] = parent.neighbors[NW];
+                this.neighbors[E] = parent.neighbors[NE];
+                if(parent.neighbors[NW] != null) {
+                    this.neighbors[NW] = parent.neighbors[NW].neighbors[N];
+                    this.neighbors[N] = parent.neighbors[NW].neighbors[NE];
+                } else {
+                    this.neighbors[NW] = null;
+                    this.neighbors[N] = null;
+                }
+                if(parent.neighbors[NE] != null) {
+                    this.neighbors[NE] = parent.neighbors[NE].neighbors[N];
+                    this.neighbors[N] = parent.neighbors[NE].neighbors[NW];
+                } else {
+                    this.neighbors[NE] = null;
+                    this.neighbors[N] = null;
+
+                }
                 break;
             case E:
-                this.neighbors[SE]=parent.neighbors[S];
-                this.neighbors[NE]=parent.neighbors[N];
+                this.neighbors[E] = parent;
+                this.neighbors[SE] = parent.neighbors[S];
+                this.neighbors[NE] = parent.neighbors[N];
+                this.neighbors[N] = parent.neighbors[NW];
+                this.neighbors[S] = parent.neighbors[SW];
+                if(parent.neighbors[NE] != null) {
+                    this.neighbors[NW] = parent.neighbors[NW].neighbors[W];
+                    this.neighbors[W] = parent.neighbors[NW].neighbors[SW];
+                } else {
+                    this.neighbors[NW] = null;
+                    this.neighbors[W] = null;
+                }
+                if(parent.neighbors[SW] != null) {
+                    this.neighbors[SW] = parent.neighbors[SW].neighbors[W];
+                    this.neighbors[W] = parent.neighbors[SW].neighbors[NW];
+                } else {
+                    this.neighbors[SW] = null;
+                    this.neighbors[W] = null;
+                }
                 break;
             case W:
-                this.neighbors[SW]=parent.neighbors[S];
-                this.neighbors[NW]=parent.neighbors[N];
+                this.neighbors[W] = parent;
+                this.neighbors[SW] = parent.neighbors[S];
+                this.neighbors[NW] = parent.neighbors[N];
+                this.neighbors[N] = parent.neighbors[NE];
+                this.neighbors[S] = parent.neighbors[S];
+                if(parent.neighbors[NW] != null) {
+                    this.neighbors[NE] = parent.neighbors[NE].neighbors[E];
+                    this.neighbors[E] = parent.neighbors[NE].neighbors[SE];
+                } else {
+                    this.neighbors[NE] = null;
+                    this.neighbors[E] = null;
+                }
+                if(parent.neighbors[SE] != null) {
+                    this.neighbors[SE] = parent.neighbors[SE].neighbors[E];
+                    this.neighbors[E] = parent.neighbors[SE].neighbors[NE];
+                } else {
+                    this.neighbors[SE] = null;
+                    this.neighbors[E] = null;
+                }
                 break;
             case NE:
-                this.neighbors[N]=parent.neighbors[W];
-                this.neighbors[E]=parent.neighbors[S];
+                this.neighbors[NE] = parent;
+                this.neighbors[N] = parent.neighbors[W];
+                this.neighbors[E] = parent.neighbors[S];
+                if(parent.neighbors[W] != null) {
+                    this.neighbors[NW] = parent.neighbors[W].neighbors[W];
+                    this.neighbors[W] = parent.neighbors[W].neighbors[SW];
+                    if(parent.neighbors[W].neighbors[SW] != null) {
+                        this.neighbors[SW] = parent.neighbors[W].neighbors[SW].neighbors[S];
+                    }
+                } else {
+                    this.neighbors[NW] = null;
+                    this.neighbors[W] = null;
+                }
+                if(parent.neighbors[S] != null) {
+                    this.neighbors[SE] = parent.neighbors[S].neighbors[S];
+                    this.neighbors[S] = parent.neighbors[S].neighbors[SW];
+                    if(parent.neighbors[S].neighbors[SW] != null) {
+                        this.neighbors[SW] = parent.neighbors[S].neighbors[SW].neighbors[W];
+                    }
+                } else {
+                    this.neighbors[SE] = null;
+                    this.neighbors[S] = null;
+                }
                 break;
             case NW:
-                this.neighbors[N]=parent.neighbors[E];
-                this.neighbors[W]=parent.neighbors[S];
+                this.neighbors[NW] = parent;
+                this.neighbors[N] = parent.neighbors[E];
+                this.neighbors[W] = parent.neighbors[S];
                 break;
             case SE:
-                this.neighbors[E]=parent.neighbors[N];
-                this.neighbors[S]=parent.neighbors[W];
+                this.neighbors[SE] = parent;
+                this.neighbors[E] = parent.neighbors[N];
+                this.neighbors[S] = parent.neighbors[W];
                 break;
             case SW:
-                this.neighbors[W]=parent.neighbors[N];
-                this.neighbors[S]=parent.neighbors[E];
+                this.neighbors[SW] = parent;
+                this.neighbors[W] = parent.neighbors[N];
+                this.neighbors[S] = parent.neighbors[E];
                 break;
         }
     }
@@ -112,6 +204,8 @@ public class Node implements GridElement {
         public int getPlayer() {
             return player;
         }
+
+
 
     }
 
