@@ -92,8 +92,13 @@ public class Node implements GridElement {
 
 
         private void createColumn(Node edgeNode, boolean createOnLeft){
+        Node newNode;
         do{
-
+            if(createOnLeft) {
+                newNode = new Node(this, W);
+            }else{
+                newNode = new Node(this,E);
+            }
         }while(false);
             Node nextNode = edgeNode.neighbors[N];
             while(nextNode != null){
@@ -104,6 +109,9 @@ public class Node implements GridElement {
 
         }
 
+        public int getPlayer() {
+            return player;
+        }
 
     }
 
