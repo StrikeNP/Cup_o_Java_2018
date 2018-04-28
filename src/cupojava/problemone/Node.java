@@ -132,26 +132,6 @@ public class Node implements GridElement {
                 this.neighbors[NW] = parent;
                 this.neighbors[N] = parent.neighbors[E];
                 this.neighbors[W] = parent.neighbors[S];
-                if(parent.neighbors[E] != null) {
-                    this.neighbors[NW] = parent.neighbors[W].neighbors[W];
-                    this.neighbors[W] = parent.neighbors[W].neighbors[SW];
-                    if(parent.neighbors[W].neighbors[SW] != null) {
-                        this.neighbors[SW] = parent.neighbors[W].neighbors[SW].neighbors[S];
-                    }
-                } else {
-                    this.neighbors[NW] = null;
-                    this.neighbors[W] = null;
-                }
-                if(parent.neighbors[S] != null) {
-                    this.neighbors[SE] = parent.neighbors[S].neighbors[S];
-                    this.neighbors[S] = parent.neighbors[S].neighbors[SW];
-                    if(parent.neighbors[S].neighbors[SW] != null) {
-                        this.neighbors[SW] = parent.neighbors[S].neighbors[SW].neighbors[W];
-                    }
-                } else {
-                    this.neighbors[SE] = null;
-                    this.neighbors[S] = null;
-                }
                 break;
             case SE:
                 this.neighbors[SE] = parent;
