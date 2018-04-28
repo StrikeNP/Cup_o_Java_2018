@@ -10,7 +10,7 @@ public class Map {
 
     public static void main(String[] args) {
         Scanner in = new Scanner(System.in);
-        firstPosition = new Node(-1, new Node[8]);
+        firstPosition = new Node(0, new Node[8]);
         numPlayers = Integer.parseInt(in.nextLine());
         int numMoves = Integer.parseInt(in.nextLine());
         ArrayList<String> moves = new ArrayList<>();
@@ -111,8 +111,8 @@ public class Map {
             if(currentNode.getPlayer() == playerNumber) {
                 runningList.add(new TraversalNode(currentNode));
             }
-            for(Node node : currentNode.neighbors) {
-                return getNodesFromPlayer(node, playerNumber, runningList);
+            for(int i = 0; i < currentNode.neighbors.length; i++) {
+                return getNodesFromPlayer(currentNode.neighbors[i], playerNumber, runningList);
             }
         }
         return null;
