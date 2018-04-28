@@ -88,7 +88,7 @@ public class Node implements GridElement {
                 this.neighbors[NW] = parent.neighbors[N];
                 this.neighbors[N] = parent.neighbors[NE];
                 this.neighbors[S] = parent.neighbors[S];
-                if(parent.neighbors[NW] != null) {
+                if(parent.neighbors[NE] != null) {
                     this.neighbors[NE] = parent.neighbors[NE].neighbors[E];
                     this.neighbors[E] = parent.neighbors[NE].neighbors[SE];
                 } else {
