@@ -34,30 +34,33 @@ public class Node implements GridElement {
     }
 
 
-    public Node(int player, Node[] neighbors){
-        this.player = player;
-        this.neighbors = neighbors;
-    }
-
-    public void validateBorders() {
-        for(Node testNode: neighbors){
-
+        public Node(int player, Node[] neighbors){
+            this.player = player;
+            this.neighbors = neighbors;
         }
-    }
+
+        public void validateBorders() {
+            for(Node testNode: neighbors){
+
+            }
+        }
 
 
-    private void createColumn(Node edgeNode, boolean createOnLeft){
+        private void createColumn(Node edgeNode, boolean createOnLeft){
 //        do{
 //            Node newNode = new Node(0, )
 //        }
-        Node nextNode = edgeNode.neighbors[N];
-        while(nextNode != null){
+            Node nextNode = edgeNode.neighbors[N];
+            while(nextNode != null){
 //                nextNode.neighbors[E] =
+            }
         }
-    }
-    private void createRow(){
+        private void createRow(){
+
+        }
+
 
     }
 
 
-}
+
